@@ -1,2 +1,2 @@
 # Problem-Solving
-Repository for recording Algorithm problem solving
+Repository for recording algorithm problem solving
