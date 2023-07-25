@@ -1,57 +1,29 @@
 class Solution:
-    def myAtoi(self, s: str) -> int:        
-        plus_minus = ["-", "+"]
+    def myAtoi(self, s: str) -> int:
+        s = s.strip()
         
-        answer = list()
+        answer = None
         for value in s:
-            if value == " ":
-                if (len(answer) != 0) and (answer[-1] in plus_minus):
-                    break
-                
-                if self.is_answer(answer) is False:
-                    continue
+            if answer is None:
+                if value.isdigit() or (value in ["-", "+"]):
+                    answer = value
                 else:
                     break
-                
-            if value in plus_minus:
-                if self.is_answer(answer) is True:
+            
+            else:
+                if value.isdigit():
+                    answer += value
+                else:
                     break
-                
-                if (len(answer) > 0) and (answer[-1] in plus_minus):
-                    answer = list()
-                    break
-                
-                answer.append(value)
-                continue
-                    
-            try:
-                answer.append(str(int(value)))
-            except:
-                break
-        
-        if len(answer) == 0:
+            
+        if (answer is None) or (answer in ["-", "+"]):
             return 0
         
-        try:
-            answer = "".join(answer).replace("+", "")
-            answer = int(answer)
-        except:
-            return 0
-        
-        if answer < -(2 ** 31):
+        answer = int(answer)
+        if answer < - (2 ** 31):
             answer = - (2 ** 31)
         
         if answer > 2 ** 31 - 1:
             answer = 2 ** 31 - 1
-                
-        return answer
 
-    def is_answer(self, values):
-        try:
-            answer = int("".join(values).replace("+", ""))
-        except:
-            return False
-        
-        return True
-    
-    
+        return answer
