@@ -15,7 +15,6 @@ def solution(n, wires):
         temp_tree[x].remove(y)
         temp_tree[y].remove(x)
         
-        count = 0
         stack = [1]
         visited = set()
         while stack:
