@@ -1,6 +1,5 @@
 def solution(routes):
     routes.sort(key=lambda x: x[0])
-    print(routes)
         
     answer = 0
     end_point = None
