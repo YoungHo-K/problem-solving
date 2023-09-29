@@ -1,51 +1,22 @@
 
 from itertools import combinations
-from collections import defaultdict
+from collections import Counter
 
 
-def solution(orders, course):    
-    order_dict = defaultdict(list)
-    for index, order in enumerate(orders):
-        for val in order:
-            order_dict[val].append(index)
-
-    items = list(filter(lambda x: len(x[1]) > 1, order_dict.items()))           
-    items = [item[0] for item in items]
-
+def solution(orders, course):
     answer = list()
-    for length in course:
-        temp_answer = list()
-        cnt = 2
-        
-        comb = set()
-        for order in orders:
-            if len(order) < length:
-                continue
-            
-            order = list(order)
-            order.sort()
-            comb = comb | set(combinations(order, length))
-        
-        for menu in comb:
-            menu_name = [menu[0]]
-            menu_items = set(order_dict[menu[0]])
-            
-            for name in menu[1: ]:
-                menu_name.append(name)
-                menu_items = menu_items & set(order_dict[name])
-
-            
-            menu_name.sort()
-            menu_name = "".join(menu_name)
-            if cnt < len(menu_items):
-                temp_answer = [menu_name]
-                cnt = len(menu_items)
-                
-            elif cnt == len(menu_items):
-                temp_answer.append(menu_name)
     
-        answer.extend(temp_answer)
-
-    answer.sort()
+    for length in course:
+        combs = list()
+        for order in orders:
+            combs += combinations(sorted(order), length)
         
-    return answer
+        counter = Counter(combs).most_common()  # return tuples
+        for string, count in counter:
+            if (count > 1) and (count == counter[0][1]):
+                answer.append("".join(string))
+                continue
+                
+            break                
+    
+    return sorted(answer)
