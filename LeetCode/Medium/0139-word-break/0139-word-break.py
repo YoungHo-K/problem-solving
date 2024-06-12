@@ -9,8 +9,8 @@ class Solution:
 
             for word in wordDict:
                 word_length = len(word)
-
-                if substring[-word_length:] == word:
-                    dp[length] = dp[length] or dp[length - word_length]
-        
+                
+                if (substring[-word_length:] == word) and (dp[length - word_length] is True):
+                    dp[length] = True
+                    
         return dp[-1]
