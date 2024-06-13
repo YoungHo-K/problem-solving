@@ -2,26 +2,25 @@
 
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        if len(intervals) == 1:
+            return intervals
+        
         intervals.sort(key=lambda x: x[0])
-
-        answer = list()
-        x, y = intervals[0]
+        
+        start = intervals[0][0]
+        end = intervals[0][1]
+        
+        answer = []
         for index in range(1, len(intervals)):
-            next_x, next_y = intervals[index]
-
-            if next_x <= y:
-                if y < next_y:
-                    y = next_y
-
+            if start <= intervals[index][0] <= end:
+                end = max(end, intervals[index][1])
                 continue
+            
+            answer.append([start, end])
+            
+            start = intervals[index][0]
+            end = intervals[index][1]
 
-            answer.append([x, y])
-            x = next_x
-            y = next_y
-
-        if [x, y] not in answer:
-            answer.append([x, y])
-
-        return answer           
-
-
+        answer.append([start, end])
+            
+        return answer
