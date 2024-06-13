@@ -20,16 +20,13 @@ class Solution:
                 
             return dp[start][end]
         
-        
         answer = None
-        for length in range(n, 0, -1):            
-            for index in range(0, n - length + 1):
-                if is_palindrome(index, index + length - 1):
-                    answer = s[index: index + length]
-                    break
-            
-            if answer is not None:
-                break
+        for i in range(0, n):            
+            for j in range(i, n):
+                substring = s[i: j + 1]
+                                
+                if is_palindrome(i, j) and ((answer is None) or (len(answer) < len(substring))):                    
+                    answer = substring
         
         return answer
         
