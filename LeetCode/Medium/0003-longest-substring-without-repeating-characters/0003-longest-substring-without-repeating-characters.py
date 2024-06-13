@@ -1,33 +1,22 @@
 
+from collections import deque
+
 
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         answer = 0
 
-        substring = list()
-        for letter in s:
-            if letter not in substring:
-                substring.append(letter)
-
-                continue
-
-            if answer < len(substring):
-                answer = len(substring)
-
-            temp_substring = list()
-            while True:
-                if substring[-1] != letter:
-                    temp_substring.append(substring[-1])
-                    substring = substring[: -1]
-
-                    continue
-
-                break
-
-            substring = temp_substring[::-1] + [letter]
-
-        if answer < len(substring):
-            answer = len(substring)
-
+        left = 0
+        history = deque([])
+        for right in range(0, len(s)):
+            word = s[right]
+            if word in history:
+                while word in history:
+                    history.popleft()
+                    left += 1
+                    
+            answer = max(answer, right - left + 1)
+            history.append(word)
+            
         return answer            
             
