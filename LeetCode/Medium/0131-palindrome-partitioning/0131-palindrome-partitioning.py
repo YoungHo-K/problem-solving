@@ -18,13 +18,7 @@ class Solution:
                     dfs(end + 1)
                     substrings.pop()
             
-        for index in range(0, n):
-            substr = s[: index + 1]
-            
-            if substr == substr[::-1]:    
-                substrings.append(substr)
-                dfs(index + 1)
-                substrings.pop()
-                
+        dfs(0)
+        
         return answer
     
