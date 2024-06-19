@@ -1,6 +1,3 @@
-import math
-
-
 class Solution:
     def minimumBeautifulSubstrings(self, s: str) -> int:
         n = len(s)
