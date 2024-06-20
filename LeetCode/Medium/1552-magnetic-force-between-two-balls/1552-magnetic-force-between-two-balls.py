@@ -10,11 +10,11 @@ class Solution:
             
             ball_count = 1
             ball_position = position[0]
-            for current in position[1:]:
-                if current - ball_position >= mid:
+            for index in range(1, len(position)):
+                if position[index] - ball_position >= mid:
                     ball_count += 1
-                    ball_position = current
-                
+                    ball_position = position[index]
+            
             if m <= ball_count:
                 answer = max(answer, mid)
                 left = mid + 1
