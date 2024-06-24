@@ -17,13 +17,13 @@ class Solution:
                 return len(strs[i])
         
         return -1
-        
-    def is_subsequence(self, y, x):
+    
+    def is_subsequence(self, x, y):
         length = 0
-        for x_val in x:
-            if (length < len(y)) and (y[length] == x_val):
+        for val in y:
+            if (length < len(x)) and (x[length] == val):
                 length += 1
                 
-        return length == len(y)
+        return length == len(x)
 
     
