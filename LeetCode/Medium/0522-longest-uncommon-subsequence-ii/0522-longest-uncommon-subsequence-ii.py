@@ -9,7 +9,6 @@ class Solution:
                 if i == j:
                     continue
                 
-                print(strs[i], strs[j])                
                 if self.is_subsequence(strs[i], strs[j]):
                     is_uncommon = False
                     break
