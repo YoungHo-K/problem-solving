@@ -12,9 +12,6 @@ class Solution:
         if m < n:
             version2 += ["0"] * (n - m)
         
-        print(version1)
-        print(version2)
-        
         for index in range(0, max(n, m)):
             value_1 = int(version1[index])
             value_2 = int(version2[index])
