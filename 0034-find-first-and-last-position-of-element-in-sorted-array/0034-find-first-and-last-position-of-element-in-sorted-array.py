@@ -17,13 +17,13 @@ class Solution:
             else:
                 right = mid - 1
                 
-        answer = []
+        answer = [-1, -1]
         for index in range(left, right + 1):
             if nums[index] == target:
-                answer.append(index)
-        
-        if len(answer) == 0:
-            return [-1, -1]
-        
-        return [min(answer), max(answer)]
+                if answer[0] == -1:
+                    answer[0] = index
+                
+                answer[1] = index
+                
+        return answer
         
