@@ -5,15 +5,21 @@ class Solution:
     def smallestSubsequence(self, s: str) -> str:
         counter = Counter(s)
         
-        answer = []
+        stack = []
+        used = set()
+        
         for value in s:
-            while answer and (value not in answer) and (value < answer[-1]) and (counter[answer[-1]] > 0):
-                answer.pop()
-            
-            if value not in answer:
-                answer.append(value)
-                
             counter[value] -= 1
-        
-        return ''.join(answer)
-        
+            
+            if value in used:
+                continue
+                
+            while stack and (value < stack[-1]) and (counter[stack[-1]] > 0):
+                removed_value = stack.pop()
+                used.remove(removed_value)
+            
+            stack.append(value)
+            used.add(value)
+            
+        return "".join(stack)
+                
